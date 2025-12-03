@@ -8,7 +8,7 @@ Obs: tudo abaixo assume que o projeto contém o código Python (app/`school_sche
 
 ---
 
-## Visão geral 
+## Visão geral de ambientes
 
 - desenvolvimento (dev)
   - Uso: desenvolvimento iterativo, testes manuais, GUI via Docker Compose e/ou Docker Desktop.
@@ -121,13 +121,15 @@ Princípio: cada ambiente tem um pipeline específico com responsabilidades clar
 ## Estrutura de um job de deploy (exemplo)
 
 1) Build & push image (GHCR)
+
+```yaml
 - name: Build and push GHCR image
   uses: docker/build-push-action@v4
   with:
     context: .
     push: true
     tags: ghcr.io/<org>/school_scheduler:${{ github.ref_name || github.sha }}
-
+```
 
 2) Apply manifests and wait rollout
 
